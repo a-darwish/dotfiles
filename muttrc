@@ -1,0 +1,165 @@
+# Google IMAP server settings
+set imap_user = 'darwish.07@gmail.com'
+# set imap_pass = ''
+
+# Mutt SMTP support is not matured yet
+set smtp_url="smtps://darwish.07@gmail.com@smtp.gmail.com:465/"
+# set smtp_pass = ""
+
+# Those options tend to slow headers navigation process
+#set imap_check_subscribed="yes"
+#set imap_list_subscribed="yes"
+#set move="no"
+
+# Map Mutt folders with Gmail Folders
+set spoolfile = "imaps://imap.gmail.com:993/Mine"
+set folder = imaps://imap.gmail.com:993
+set record=""                                   # Gmail will automatically save sent mail in its SENT MAIL folder
+set postponed="imaps://imap.gmail.com/[Gmail]/Drafts"
+
+# activate TLS if available on the server
+set ssl_starttls=yes
+# always use SSL when connecting to a server
+set ssl_force_tls=yes
+
+# Specific Local paths for caches and certificates
+set header_cache="~/.mutt/cache/headers"        # Save headers insted of fetching them every time
+set message_cachedir="~/.mutt/cache/bodies"     # Watch out-of-control caches!
+set certificate_file=~/.mutt/certificates       # Gmail certificates
+
+#
+# Older SMTP settings when mutt did not have a
+# built-in SMTP mailer
+#
+# cat gmailout: 'ssmtp -au "darwish.07@gmail.com" -ap "Password"'
+#
+# set sendmail="~/.bin/gmailout"
+#
+
+# Mail sending options
+set realname="Ahmed S. Darwish"
+set from="darwish.07@gmail.com"			# Default from address - (can be overriden by my_hdr)
+set use_from					# Use given From: header in outgoing messages
+set user_agent					# Display user agent name
+set sig_dashes					# Display two dashes (--) above the signature
+set signature="~/.signature"			# Signature file path
+set postpone="yes"				# Messages are saved in "postponed" mailbox when not sent yet
+
+# Sent mail options
+set autoedit					# Skip initial send-menu
+set edit_headers				# Set message headers along with the body
+set fast_reply					# Skip editing subject line, go to reply body directly
+unset header					# Include headers of the message to the reply edit buffer
+set weed					# weed headers when displaying, forwarding, printing, or replying to messages
+set charset="UTF-8"
+set editor=emacs				# Typing mode
+set ispell="/usr/bin/ispell"			# spell-check your messages
+
+# Available mail headers
+ignore *
+unignore date subject to cc from:
+unignore organization organisation		# x-mailer: x-newsreader: mailer:
+unignore posted-to:
+
+# Mailing lists
+#subscribe linux-kernel
+#set followup_to				# Replying to a known list, avoid getting this copy again (Mail-Followup-to)
+
+# Order of mail headers
+hdr_order Date: To: Cc: From: Subject:
+
+# Attachments
+set attach_sep="---Attachment---"		# separator
+set attach_split				# Operate on attachments one by one
+
+# set index_format="%4C   %-16.16n  (%4c)  %s"
+
+# Mail messages Display stuff
+set mark_old					# Distinct between old and new _unread_ messages
+set sort="threads"				# Sort by threads
+set sort_aux="date"				# Sort mails in threads by date
+set strict_threads				# Let messages with the same subject be uner a pseudo thread too
+set to_chars=" +TCFL"				# " ": mail not addressed to your address
+    	       					# "+": You are the only recepient of the message
+						# "T": In the TO field, but not the only one
+						# "C": You're in the CC, but not the only recepient
+						# "F": A mail sent by me
+						# "L": A mailing list
+
+unset menu_scroll				# moving across a screen boundry scrolls up or down one line 
+set pager="builtin"				# use the default builtin pager
+set pager_stop					# Don't move to next message when u r at the end of current message
+set quote_regexp="^([ \t]*[|>:}#])+"		# RegExp to determine quoted sections of text
+set status_on_top="no"				# Let the status line be at the bottom
+set pop_delete="yes"				# Delete successful downloaded messages from server
+set pager_index_lines=10
+
+# Other
+set shell="/bin/bash"
+set print="no"					# Don't ask for conformation before printing
+set print_command="true"			# Dummy, I won't print anything with mutt
+set copy="yes"					# Copy your outgoing messages
+set help					# print bindings help
+#set keep_flagged="yes"				# Don't move flagged messages automatically to mbox
+set move="no"					# Don't ask to move read messages from spool to mbox
+
+#
+# Emacs-like key bindings
+#
+
+bind generic	"#"		tag-entry
+bind generic	<left>		previous-entry
+bind generic 	<right>		next-entry
+
+bind index	"c"		copy-message
+bind index	"\Cx\Cf"	change-folder
+
+bind pager	"\Cx\Cs"	copy-message    # Emulate saving a message by copying. I don't message be deleted from inbox
+bind pager	"#"		tag-message
+bind pager	<up>		previous-line
+bind pager	<down>		next-line
+bind pager	"<"		top
+bind pager	">"		bottom
+bind pager	<home>		top
+bind pager	<end>		bottom
+bind pager	"{"		previous-thread
+bind pager	"}"		next-thread
+bind pager	"\Cx\Cf"	change-folder
+bind browser	"e"		check-new
+
+#macro index	"\Cx\Cb"	"<change-folder>?"	
+#macro index	"w"		"<change-folder>?"	
+#macro index	"\Cx\Cs"	"|cat > ~/"	
+
+#macro pager	"\Cx\Cb"	"<change-folder>?"	
+#macro pager	"w"		"<change-folder>?"
+#macro pager	"\Cx\Cs"	"|cat > ~/"	
+
+#
+# Good colors
+#
+
+color normal		default		black
+color hdrdefault	cyan		black
+color signature         cyan		black
+color attachment	brightyellow	black
+color indicator         black		cyan
+color quoted		green		black
+color quoted1		white		black
+color quoted2		yellow		black
+color tilde		blue		black
+
+# Mark email addresses and URLs
+color body		brightcyan	default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+color body		brightwhite	default "(http|ftp|news|telnet|finger)://[^ \">\t\r\n]*"
+color body		brightwhite	default "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+# Change color of subject and Date line
+color header		brightmagenta	default ^(Date):
+color header		brightyellow	default ^Subject:
+
+# Color the smilies with read ..
+color body		brightred	default " [;:]-*[)>(<|]"	# :-) etc...
+
+# check for new mail on startup
+# exec fetch-mail
