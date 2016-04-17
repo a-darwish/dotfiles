@@ -2,7 +2,30 @@
 set imap_user = 'darwish.07@gmail.com'
 # set imap_pass = ''
 
-# Mutt SMTP support is not matured yet
+#
+# Google SMTP server settings
+#
+# Since the authentication takes place over a TLS encrypted connection,
+# gmail requires `PLAIN` SMTP authentication with its servers. This can
+# be stated using `set smtp_authenticators="plain"`, but there is no
+# need to be that explicit.
+#
+# On Fedora systems, mutt needs SASL libraries to do this kind of PLAIN
+# authentication. Unfortunately, these are not direct dependencies of
+# the mutt RPM package and needs to be separately installed using:
+#
+#   $ sudo yum -y install cyrus-sasl-plain
+#
+# Not installing the above package will lead to the "No authenticators
+# found" mutt error upon sending any email over SMTP..
+#
+# References:
+# - GMail Help Forum
+#   https://productforums.google.com/forum/#!topic/gmail/hO0LU4iw5NQ
+#
+# - ServerFault/CentOS
+#   http://serverfault.com/questions/211749/sending-mail-from-postfix-via-gmail-unable-to-get-local-issuer-certificate-cer/342207#342207
+#
 set smtp_url="smtps://darwish.07@gmail.com@smtp.gmail.com:465/"
 # set smtp_pass = ""
 
