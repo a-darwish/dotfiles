@@ -1,8 +1,11 @@
 
 !
-! This file should be automatically loaded by modern display managers
+! Install @ ~/.Xresources
 !
-! After login, validate that this has been properly loaded by doing:
+! For rationale, check comments at this repo's fonts.conf file.
+!
+! After installation, the file should be automatically loaded by
+! modern display managers upon login. Validate this by doing:
 !
 !    $ xrdb -query
 !
