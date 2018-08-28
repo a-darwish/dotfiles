@@ -20,3 +20,8 @@
 ;; https://www.emacswiki.org/emacs/DeletingWhitespace
 ;;
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;;
+;; Automatically display the column number
+;;
+(column-number-mode)
