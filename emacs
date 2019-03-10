@@ -1,10 +1,11 @@
 ;;
 ;; Disable all toolbars and tooltips
 ;;
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tooltip-mode -1)
+(when (display-graphic-p)
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (menu-bar-mode -1)
+      (tooltip-mode -1))
 
 ;;
 ;; Use the default system monospace font, as configured
@@ -25,3 +26,8 @@
 ;; Automatically display the column number
 ;;
 (column-number-mode)
+
+;;
+;; Linux-kernel C style
+;;
+(setq c-default-style "linux" c-basic-offset 8)
