@@ -1,3 +1,6 @@
 [user]
 	email = darwish.07@gmail.com
 	name = Ahmed S. Darwish
+
+[notes]
+	rewriteRef = refs/notes/commits
