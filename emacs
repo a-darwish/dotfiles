@@ -1,3 +1,4 @@
+
 ;;
 ;; Disable all toolbars and tooltips
 ;;
@@ -31,3 +32,18 @@
 ;; Linux-kernel C style
 ;;
 (setq c-default-style "linux" c-basic-offset 8)
+
+;;
+;; For kernel projects, just open emacs from within the project
+;; directory; all dekstop load/save ops shall be automatically
+;; done.
+;;
+;; Make sure not to kill your important project buffers! The
+;; desktop state is saved on exit.
+;;
+(setq project-path default-directory)
+(when
+    (file-exists-p (concat project-path ".emacs.desktop"))
+    (desktop-read project-path)
+    (add-hook 'kill-emacs-hook `(lambda ()
+				(desktop-save ,project-path t))))
