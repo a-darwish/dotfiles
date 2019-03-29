@@ -109,7 +109,7 @@ set to_chars=" +TCFL"				# " ": mail not addressed to your address
 						# "F": A mail sent by me
 						# "L": A mailing list
 
-unset menu_scroll				# moving across a screen boundry scrolls up or down one line 
+unset menu_scroll				# moving across a screen boundry scrolls up or down one line
 set pager="builtin"				# use the default builtin pager
 set pager_stop					# Don't move to next message when u r at the end of current message
 set quote_regexp="^([ \t]*[|>:}#])+"		# RegExp to determine quoted sections of text
@@ -149,40 +149,3 @@ bind pager	"{"		previous-thread
 bind pager	"}"		next-thread
 bind pager	"\Cx\Cf"	change-folder
 bind browser	"e"		check-new
-
-#macro index	"\Cx\Cb"	"<change-folder>?"	
-#macro index	"w"		"<change-folder>?"	
-#macro index	"\Cx\Cs"	"|cat > ~/"	
-
-#macro pager	"\Cx\Cb"	"<change-folder>?"	
-#macro pager	"w"		"<change-folder>?"
-#macro pager	"\Cx\Cs"	"|cat > ~/"	
-
-#
-# Good colors
-#
-
-color normal		default		black
-color hdrdefault	cyan		black
-color signature         cyan		black
-color attachment	brightyellow	black
-color indicator         black		cyan
-color quoted		green		black
-color quoted1		white		black
-color quoted2		yellow		black
-color tilde		blue		black
-
-# Mark email addresses and URLs
-color body		brightcyan	default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-color body		brightwhite	default "(http|ftp|news|telnet|finger)://[^ \">\t\r\n]*"
-color body		brightwhite	default "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
-
-# Change color of subject and Date line
-color header		brightmagenta	default ^(Date):
-color header		brightyellow	default ^Subject:
-
-# Color the smilies with read ..
-color body		brightred	default " [;:]-*[)>(<|]"	# :-) etc...
-
-# check for new mail on startup
-# exec fetch-mail
