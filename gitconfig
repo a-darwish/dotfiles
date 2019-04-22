@@ -4,3 +4,6 @@
 
 [notes]
 	rewriteRef = refs/notes/commits
+
+[alias]
+	one = show -s --format='%h ("%s")'
