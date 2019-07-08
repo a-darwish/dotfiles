@@ -40,6 +40,10 @@
 ;; directory; all dekstop load/save ops shall be automatically
 ;; done.
 ;;
+;; NOTE: export EDITOR='emacs -nw -Q' (quick mode) in your bashrc,
+;; or emacs startup will be dead slow in case of git commits and
+;; rebases from the project base directory
+;;
 ;; Make sure not to kill your important project buffers! The
 ;; desktop state is saved on exit.
 ;;
