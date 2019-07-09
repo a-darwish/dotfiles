@@ -61,3 +61,9 @@
     ;; 'desktop-save' will also automatically remove '.emacs.desktop.lock'
     (add-hook 'kill-emacs-hook `(lambda ()
 				(desktop-save ,project-path t))))
+
+;;
+;; For better continuity when loading big projects desktop state (e.g.
+;; linux kernel tree as seen above), disable the useless splash screen.
+;;
+(setq inhibit-splash-screen t)
