@@ -11,10 +11,10 @@
 (menu-bar-mode -1)
 
 ;;
-;; Use the default system monospace font, as configured
-;; by fontconfig (fonts.conf, in this same dotfiles repo)
+;; Use the default system monospace font, as configured by fontconfig
+;; (fonts.conf, in this same dotfiles repo).
 ;;
-;; Result font can be known using `fc-match Monospace'
+;; Resulting matching font can be known using `fc-match Monospace'.
 ;;
 (set-default-font "Monospace-20")
 
@@ -36,20 +36,28 @@
 (setq c-default-style "linux" c-basic-offset 8)
 
 ;;
-;; For kernel projects, just open emacs from within the project
-;; directory; all dekstop load/save ops shall be automatically
-;; done.
+;; If CWD (e.g. linux kernel project folder) contains an emacs desktop
+;; file, automatically load it. This is very useful for continuing big
+;; projects with the same mental state (e.g. continue yesterday's work).
 ;;
-;; NOTE: export EDITOR='emacs -nw -Q' (quick mode) in your bashrc,
-;; or emacs startup will be dead slow in case of git commits and
-;; rebases from the project base directory
+;; Avoid conflicts: do not load desktop file if another emacs proccess
+;; is **actively** using it for its own session ('.emacs.desktop.lock'
+;; exists).
 ;;
-;; Make sure not to kill your important project buffers! The
-;; desktop state is saved on exit.
+;; NOTE: Invoke emacs in quick mode ('emacs -Q') if you want to avoid
+;; the possible heavy overhead of this operation (huge desktop state).
 ;;
 (setq project-path default-directory)
+(setq desktop-file (concat project-path ".emacs.desktop"))
+(setq desktop-file-lock (concat desktop-file ".lock"))
 (when
-    (file-exists-p (concat project-path ".emacs.desktop"))
+    (and
+        (file-exists-p desktop-file)
+        (not (file-exists-p desktop-file-lock)))
+
+    ;; 'desktop-read' will also automatically create '.emacs.desktop.lock'
     (desktop-read project-path)
+
+    ;; 'desktop-save' will also automatically remove '.emacs.desktop.lock'
     (add-hook 'kill-emacs-hook `(lambda ()
 				(desktop-save ,project-path t))))
