@@ -6,4 +6,5 @@
 	rewriteRef = refs/notes/commits
 
 [alias]
-	one = show -s --format='%h ("%s")'
+	one = show -s --abbrev=12 --pretty='format:%h ("%s")'
+	logone = log --pretty='format:%h ("%s")'
