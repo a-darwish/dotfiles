@@ -16,7 +16,7 @@
 ;;
 ;; Resulting matching font can be known using `fc-match Monospace'.
 ;;
-(set-default-font "Monospace-20")
+(set-default-font "Ubuntu Mono 19")
 
 ;;
 ;; Automatically remove trailing-whitespace
@@ -29,6 +29,15 @@
 ;; Automatically display the column number
 ;;
 (column-number-mode)
+
+;;
+;; Auto indentation for text files
+;;
+;; https://www.emacswiki.org/emacs/AutoIndentation
+;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Turning-on-auto_002dfill-by-default.html
+;;
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;;
 ;; Linux-kernel C style
