@@ -1,3 +1,8 @@
+;;
+;; Quick tips:
+;;
+;;  - In CUA mode, just press Alt-RET for column editing
+;;
 
 ;;
 ;; Disable all toolbars and tooltips
@@ -36,13 +41,48 @@
 ;; https://www.emacswiki.org/emacs/AutoIndentation
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Turning-on-auto_002dfill-by-default.html
 ;;
-(setq-default fill-column 80)
+(setq-default fill-column 72)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;;
 ;; Linux-kernel C style
 ;;
 (setq c-default-style "linux" c-basic-offset 8)
+
+;;
+;; Load cscope TAGS
+;;
+;; - "xcscope-el" debian package
+;; - homepage: https://github.com/dkogan/xcscope.el
+;;
+;; Default bindings:
+;;
+;; - C-c s s	Find symbol.
+;; - C-c s =	Find assignments to this symbol
+;; - C-c s d	Find global definition.
+;; - C-c s g	Find global definition (alternate binding).
+;; - C-c s G	Find global definition without prompting.
+;; - C-c s c	Find functions calling a function.
+;; - C-c s C	Find called functions (list functions called from a function).
+;; - C-c s t	Find text string.
+;; - C-c s e	Find egrep pattern.
+;; - C-c s f	Find a file.
+;; - C-c s i	Find files #including a file.
+;;
+(require 'xcscope)
+
+;;
+;; Columns editing (CUA mode)
+;;
+;; Use Alt-RET instead of C-RET as gnome-terminal on Wayland passes
+;; Control-RET just as RET to emacs:
+;;
+;; - Verify with "C-h k"
+;;
+;; - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=899376
+;;   gnome-terminal: Ctrl-Shift-Enter/Ctrl-Enter in MC isn't working on Wayland
+;;
+(global-set-key (kbd "M-RET") 'cua-rectangle-mark-mode)
 
 ;;
 ;; If CWD (e.g. linux kernel project folder) contains an emacs desktop
